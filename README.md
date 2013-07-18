@@ -2,21 +2,13 @@
 
 Facebook like UINavigationController to slide back to previous view controller.
 
-![animation](MSSlideControllerDemo/animation.gif)
-
-## Get it ready
-
-The best way to add it inside your project is with [CocoaPods](http://cocoapods.org/): simply add
-
-    pod 'MSSlideNavigationController'
-
-inside your Podfile. 
+![animation](SBSlideControllerDemo/animation.gif)
 
 ## Origins and how it works
 
-`MSSlideNavigationController` is a subclass (and a kind of *hack*!) of `UINavigationController`. It was originally created by the hacker [@chpwn](https://twitter.com/chpwn) for Facebook:
+`SBSlideNavigationController` is a subclass (and a kind of *hack*!) of `UINavigationController`. It was originally created by the hacker [@chpwn](https://twitter.com/chpwn) for Facebook:
 
-![facebook](MSSlideControllerDemo/facebook.jpg)
+![facebook](SBSlideControllerDemo/facebook.jpg)
 
 <blockquote class="twitter-tweet" lang="it"><p>@<a href="https://twitter.com/aaronash">aaronash</a> you should try the swipe back gesture I did for the latest Facebook update</p>&mdash; Grant Paul (chpwn) (@chpwn) <a href="https://twitter.com/chpwn/status/334061769364492289">13 maggio 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -32,7 +24,7 @@ I don't know about Grant Paul's implementation, but mine works creating a screen
 
 Whenever you want to add this feature to your navigation controller's hierarchy, you have to do a couple of things.
 
-First of all, use `MSSlideNavigationController` instead of `UINavigationController` (course)
+First of all, use `SBSlideNavigationController` instead of `UINavigationController` (course)
 
 If you want the fade animation for bar button items (and I am sure you do want it), the only way is to create them with a custom view, adding the actual view as a subview of the "main" custom view. An example is probably what you need:
 
@@ -58,8 +50,9 @@ Marco Sero
 - http://www.marcosero.com
 - http://twitter.com/marcosero 
 - marco@marcosero.com
+- petrucci.alberto@gmail.com
 
 ## License
 
-MSSlideNavigationController is available under the MIT license. See the LICENSE file for more info.
+SBSlideNavigationController is available under the MIT license. See the LICENSE file for more info.
 
