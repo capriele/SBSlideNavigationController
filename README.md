@@ -1,4 +1,4 @@
-# MSSlideNavigationController
+# SBSlideNavigationController
 
 Facebook like UINavigationController to slide back to previous view controller.
 
