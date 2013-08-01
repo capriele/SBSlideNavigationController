@@ -35,9 +35,26 @@ If you want the fade animation for bar button items (and I am sure you do want i
     UIView *view = [[UIView alloc] initWithFrame:button.frame];
     [view addSubview:button];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
-
+    
 And remebember to keep bar button items' sizes constant.
 
+If you want the fade animation for bar titleView, the only way is to create them with a custom view. An example is probably what you need:
+
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+    CGRect frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:frame];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = Title;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+    titleLabel.layer.shadowColor = RGBCOLOR(7, 79, 7).CGColor;
+    titleLabel.layer.shadowOffset = CGSizeMake(0.0, -1.0);
+    titleLabel.layer.shadowRadius = 1.0;
+    titleLabel.layer.shadowOpacity = 0.8;
+    titleLabel.layer.masksToBounds = NO;
+    [view addSubview:titleLabel];
+    self.navigationItem.titleView = CenterView;
 
 ## Credits
 
