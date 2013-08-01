@@ -15,8 +15,10 @@
 @property (assign, nonatomic) BOOL shouldDetect;
 
 @property (strong, nonatomic) NSArray *currentLeftButtonItems;
+@property (strong, nonatomic) UIView *currentTitleView;
 @property (strong, nonatomic) NSArray *currentRightButtonItems;
 @property (strong, nonatomic) NSMutableArray *previousLeftButtonItemViews;
+@property (strong, nonatomic) UIView *previousTitleView;
 @property (strong, nonatomic) NSMutableArray *previousRightButtonItemViews;
 @end
 
@@ -78,6 +80,7 @@
     [_currentViewController.view addSubview:_previousViewControllerImageView];
     
     _currentLeftButtonItems = _currentViewController.navigationItem.leftBarButtonItems;
+    _currentTitleView = _currentViewController.navigationItem.titleView;
     _currentRightButtonItems = _currentViewController.navigationItem.rightBarButtonItems;
     
     NSArray *previousLeftItems = _previousViewController.navigationItem.leftBarButtonItems;;
@@ -105,6 +108,10 @@
         UIBarButtonItem *barButtonItem = _currentLeftButtonItems[idx];
         [barButtonItem.customView addSubview:previousButtonView];
     }];
+    
+    _previousTitleView = _previousViewController.navigationItem.titleView;
+    _previousTitleView.frame = _currentTitleView.frame;
+    [_currentViewController.navigationController.navigationBar addSubview:_previousTitleView];
     
     [_previousRightButtonItemViews enumerateObjectsUsingBlock:^(UIView *previousButtonView, NSUInteger idx, BOOL *stop) {
         if (idx == _currentRightButtonItems.count) {
@@ -147,6 +154,8 @@
         ((UIView *)barButtonItem.customView.subviews[0]).alpha = 1 - percentage;
     }];
     
+    _currentTitleView.alpha = 1 - percentage;
+    
     [_currentRightButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem *barButtonItem, NSUInteger idx, BOOL *stop) {
         ((UIView *)barButtonItem.customView.subviews[0]).alpha = 1 - percentage;
     }];
@@ -154,6 +163,8 @@
     [_previousLeftButtonItemViews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         view.alpha = percentage;
     }];
+    
+    _previousTitleView.alpha = percentage;
     
     [_previousRightButtonItemViews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         view.alpha = percentage;
@@ -194,6 +205,7 @@
         frame.origin.x = 0;
         _currentViewController.view.frame = frame;
         [self setAlphaPercentageForBarButtonItems:0];
+        [_previousTitleView removeFromSuperview];
     } completion:^(BOOL finished) {
         [self removeScreenShots:panGestureRecognizer];
         [self clean];
@@ -249,8 +261,10 @@
         [view removeFromSuperview];
     }];
     _previousLeftButtonItemViews = nil;
+    _previousTitleView = nil;
     _previousRightButtonItemViews = nil;
     _currentLeftButtonItems = nil;
+    _currentTitleView = nil;
     _currentRightButtonItems = nil;
 }
 
